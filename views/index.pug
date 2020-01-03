@@ -11,7 +11,7 @@ block content
   script.
     function update() {
       $.get('!{captureOrderService}?timestamp=' + $.now(), function( data ) {
-          $('h2#orderCount').html(data.orderCount);
+          $('h2#orderCount').html("Order Count: " + data.orderCount);
           $('h3#timestamp').html(data.timestamp);
       });
       setTimeout(update,500);
