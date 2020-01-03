@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+      matchLabels:
+        app: frontend
+  replicas: 1
+  template:
+      metadata:
+        labels:
+            app: frontend
+      spec:
+        containers:
+        - name: frontend
+          image: cciturkey.azurecr.io/azch/frontend:latest
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          env:
+          - name: CAPTUREORDERSERVICEIP
+            value: "backend.13.74.69.238.nip.io"  # Replace with your captureorder service IP
+          ports:
+          - containerPort: 8080
+        imagePullSecrets:
+          - name: docker-registry
