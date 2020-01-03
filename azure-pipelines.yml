@@ -25,5 +25,5 @@ steps:
     tags: |
       $(Build.BuildNumber)
       latest
-    Dockerfile: '**/dockerfile'
+    Dockerfile: '**/Dockerfile'
     repository: 'azch/frontend'
